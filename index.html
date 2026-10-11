@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>4EV Control</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚔️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050505;--panel:#0f0e0b;--line:#2a2412;--gold:#e5b83a;--gold-hi:#ffd86b;--gold-lo:#8a6d1f;--text:#f3ecd8;--mute:#9a9078;--ok:#4ade80;--bad:#f87171;--warn:#fbbf24;
+--head:"Rajdhani","Arial Narrow",sans-serif;--body:"Manrope",system-ui,sans-serif;box-sizing:border-box}
+*,*::before,*::after{box-sizing:inherit}
+html,body{height:100%;margin:0}
+body{background:radial-gradient(900px 500px at 80% -10%,rgba(229,184,58,.10),transparent 60%),var(--bg);color:var(--text);font:15px/1.5 var(--body);padding-top:env(safe-area-inset-top,0px)}
+h1,h2,h3{font-family:var(--head);margin:0;letter-spacing:.02em}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--gold-hi);outline-offset:2px}
+.hidden{display:none!important}
+#login{min-height:100%;display:grid;place-items:center;padding:24px}
+.login-card{width:100%;max-width:380px;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:32px 26px;box-shadow:0 0 60px rgba(229,184,58,.08)}
+.logo{font-family:var(--head);font-weight:700;font-size:64px;line-height:1;color:var(--gold);text-shadow:0 0 28px rgba(229,184,58,.55);animation:glow 3.2s ease-in-out infinite}
+.sub{color:var(--mute);margin:4px 0 24px}
+@keyframes glow{50%{text-shadow:0 0 44px rgba(255,216,107,.85)}}
+label{display:block;font-size:13px;color:var(--mute);margin:14px 0 6px}
+input,select{width:100%;background:#000;border:1px solid var(--line);border-radius:10px;padding:11px 12px;min-height:44px}
+input:focus,select:focus{border-color:var(--gold)}
+.btn{background:linear-gradient(180deg,var(--gold-hi),var(--gold));color:#1a1403;font-weight:700;border:0;border-radius:10px;padding:11px 18px;min-height:44px;cursor:pointer;transition:box-shadow .2s,transform .1s}
+.btn:hover{box-shadow:0 0 22px rgba(229,184,58,.5)}.btn:active{transform:scale(.98)}
+.btn.ghost{background:transparent;color:var(--gold);border:1px solid var(--gold-lo)}
+.btn.full{width:100%;margin-top:22px}
+.err{color:var(--bad);min-height:20px;margin-top:12px;font-size:14px}
+#app{display:grid;grid-template-columns:230px 1fr;min-height:100%}
+nav{background:#080806;border-right:1px solid var(--line);padding:22px 14px;display:flex;flex-direction:column;gap:6px;position:sticky;top:0;height:100vh}
+nav .brand{font-family:var(--head);font-size:30px;font-weight:700;color:var(--gold);padding:0 10px 14px;text-shadow:0 0 18px rgba(229,184,58,.4)}
+nav .brand small{display:block;font-size:13px;color:var(--mute);font-weight:500;text-shadow:none}
+.nav-btn{background:none;border:1px solid transparent;border-radius:10px;text-align:left;padding:10px 12px;min-height:44px;color:var(--mute);cursor:pointer;display:flex;gap:10px;align-items:center;transition:.2s}
+.nav-btn:hover{color:var(--text)}
+.nav-btn.on{color:var(--gold-hi);background:rgba(229,184,58,.08);border-color:var(--gold-lo);box-shadow:0 0 18px rgba(229,184,58,.12)}
+.spacer{flex:1}
+main{padding:28px;max-width:1000px;width:100%}
+h1{font-size:34px;color:var(--gold-hi);margin-bottom:4px}
+.lead{color:var(--mute);margin:0 0 22px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px}
+.card h3{font-size:15px;color:var(--mute);font-weight:600}
+.big{font-family:var(--head);font-size:38px;font-weight:700;color:var(--gold-hi)}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:4px 12px;border-radius:99px;border:1px solid var(--line);font-weight:700}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--bad);box-shadow:0 0 10px var(--bad)}
+.dot.on{background:var(--ok);box-shadow:0 0 12px var(--ok)}
+.note{border-left:3px solid var(--gold-lo);padding:10px 14px;background:rgba(229,184,58,.05);border-radius:0 10px 10px 0;color:var(--mute);margin:16px 0}
+.form{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:4px 16px}
+.ok{color:var(--ok)}
+table{width:100%;border-collapse:collapse}
+td,th{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{color:var(--mute);font-weight:600;font-size:13px}
+.scroll{overflow-x:auto}
+.lvl-info{color:var(--gold-hi)}.lvl-warning{color:var(--warn)}.lvl-error{color:var(--bad)}
+code{background:#000;border:1px solid var(--line);border-radius:6px;padding:1px 6px;color:var(--gold-hi)}
+.cmds{display:grid;gap:10px}
+.cmds .card{padding:14px 18px}
+.cmds p{margin:6px 0 0;color:var(--mute);line-height:2}
+@media (max-width:800px){
+ #app{display:block;padding-bottom:calc(72px + env(safe-area-inset-bottom,0px))}
+ nav{position:fixed;left:0;right:0;bottom:0;top:auto;height:auto;flex-direction:row;justify-content:space-around;padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px));border-right:0;border-top:1px solid var(--line);z-index:5;gap:2px}
+ nav .brand,.spacer,.nav-btn .lbl-long{display:none}
+ .nav-btn{flex-direction:column;gap:2px;padding:6px 4px;font-size:11px;flex:1;justify-content:center;text-align:center}
+ .nav-btn .ico{font-size:18px}
+ main{padding:20px 16px}
+ h1{font-size:28px}
+ .mobile-out{display:inline-block!important}
+}
+.mobile-out{display:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<section id="login">
+  <form class="login-card" id="login-form" autocomplete="on">
+    <div class="logo">4EV</div>
+    <p class="sub">Forever Victory control room. Owners only.</p>
+    <label for="email">Email</label>
+    <input id="email" type="email" autocomplete="username" required>
+    <label for="pw">Password</label>
+    <input id="pw" type="password" autocomplete="current-password" required>
+    <button class="btn full" type="submit">Sign in</button>
+    <div class="err" id="login-err" role="alert"></div>
+  </form>
+</section>
+
+<div id="app" class="hidden">
+  <nav>
+    <div class="brand">4EV<small>Forever Victory</small></div>
+    <button class="nav-btn on" data-view="overview"><span class="ico">📊</span><span>Overview</span></button>
+    <button class="nav-btn" data-view="settings"><span class="ico">⚙️</span><span>Settings</span></button>
+    <button class="nav-btn" data-view="commands"><span class="ico">⌨️</span><span>Commands</span></button>
+    <button class="nav-btn" data-view="logs"><span class="ico">📜</span><span>Logs</span></button>
+    <button class="nav-btn" data-view="moderation"><span class="ico">🛡️</span><span>Moderation</span></button>
+    <button class="nav-btn" data-view="clan"><span class="ico">⚔️</span><span>Clan</span></button>
+    <div class="spacer"></div>
+    <button class="nav-btn" id="logout"><span class="ico">🚪</span><span>Sign out</span></button>
+  </nav>
+  <main id="view"></main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script>
+const SB_URL = "https://gclwpuhozlvnzzcoaifs.supabase.co";
+const SB_KEY = "sb_publishable_7pWrjwxnQls1bdfmzx80Ug_Z1K4DIET"; // public key, safe here. NEVER put the secret/service_role key in this file.
+const sb = supabase.createClient(SB_URL, SB_KEY);
+const $ = (s) => document.querySelector(s);
+let user = null, current = "overview";
+
+function el(tag, props, ...kids) {
+  const n = document.createElement(tag);
+  Object.entries(props || {}).forEach(([k, v]) => (k === "class" ? (n.className = v) : n.setAttribute(k, v)));
+  kids.flat().forEach((k) => n.append(k instanceof Node ? k : document.createTextNode(k)));
+  return n;
+}
+function head(title, lead) {
+  return [el("h1", {}, title), el("p", { class: "lead" }, lead)];
+}
+
+/* ---------- auth ---------- */
+async function enter(session) {
+  if (!session) return show(false);
+  const { data, error } = await sb.from("dashboard_users").select("role").eq("user_id", session.user.id).maybeSingle();
+  if (error || !data) {
+    await sb.auth.signOut();
+    $("#login-err").textContent = "This account is not authorised for the 4EV dashboard.";
+    return show(false);
+  }
+  user = session.user;
+  show(true);
+  render(current);
+}
+function show(loggedIn) {
+  $("#login").classList.toggle("hidden", loggedIn);
+  $("#app").classList.toggle("hidden", !loggedIn);
+}
+$("#login-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  $("#login-err").textContent = "";
+  const { data, error } = await sb.auth.signInWithPassword({ email: $("#email").value.trim(), password: $("#pw").value });
+  if (error) return ($("#login-err").textContent = "Wrong email or password.");
+  enter(data.session);
+});
+$("#logout").addEventListener("click", async () => { await sb.auth.signOut(); user = null; $("#pw").value = ""; show(false); });
+document.querySelectorAll("[data-view]").forEach((b) =>
+  b.addEventListener("click", () => {
+    document.querySelectorAll("[data-view]").forEach((x) => x.classList.toggle("on", x === b));
+    current = b.dataset.view; render(current);
+  })
+);
+
+/* ---------- views ---------- */
+async function render(v) {
+  const m = $("#view");
+  m.replaceChildren(el("p", { class: "lead" }, "Loading..."));
+  const fn = { overview: vOverview, settings: vSettings, commands: vCommands, logs: vLogs, moderation: vMod, clan: vClan }[v];
+  try { m.replaceChildren(...(await fn())); }
+  catch (e) { m.replaceChildren(el("p", { class: "err" }, "Could not load this page: " + e.message)); }
+}
+
+async function vOverview() {
+  const { data, error } = await sb.from("bot_status").select("*").eq("id", 1).maybeSingle();
+  if (error) throw error;
+  const beat = data && data.last_heartbeat ? new Date(data.last_heartbeat) : null;
+  const online = beat && Date.now() - beat.getTime() < 150000;
+  const stat = (t, v) => el("div", { class: "card" }, el("h3", {}, t), el("div", { class: "big" }, v == null ? "-" : String(v)));
+  const out = [...head("Overview", "Live status reported by the bot on Wispbyte.")];
+  out.push(el("div", { class: "grid" },
+    el("div", { class: "card" }, el("h3", {}, "Bot status"),
+      el("div", { class: "pill" }, el("span", { class: "dot" + (online ? " on" : "") }), online ? "Online" : "Offline")),
+    stat("Servers", data && data.guild_count), stat("Members", data && data.member_count),
+    stat("Latency", data && data.latency_ms != null ? data.latency_ms + " ms" : null)));
+  out.push(el("div", { class: "note" }, beat
+    ? "Last heartbeat: " + beat.toLocaleString() + ". Counts to Offline after 2.5 minutes without one."
+    : "The bot has not reported yet. These numbers stay empty until the bot connection is added (Step 5)."));
+  return out;
+}
+
+const XP_FIELDS = [
+  ["message_xp_min", "Message XP minimum", 8], ["message_xp_max", "Message XP maximum", 15],
+  ["reaction_xp_min", "Reaction XP minimum", 3], ["reaction_xp_max", "Reaction XP maximum", 8],
+  ["vc_xp_normal", "Voice XP per minute (members)", 50], ["vc_xp_staff", "Voice XP per minute (staff)", 100],
+];
+async function vSettings() {
+  const { data, error } = await sb.from("bot_settings").select("value,updated_at").eq("key", "xp").maybeSingle();
+  if (error) throw error;
+  const saved = (data && data.value) || {};
+  const form = el("form", { class: "card" }, el("div", { class: "form" }));
+  const grid = form.firstChild, inputs = {};
+  XP_FIELDS.forEach(([k, label, def]) => {
+    const i = el("input", { type: "number", min: "0", max: "100000", id: "f_" + k, value: saved[k] ?? def });
+    inputs[k] = i; grid.append(el("div", {}, el("label", { for: "f_" + k }, label), i));
+  });
+  const ev = el("select", { id: "f_xp_event" });
+  for (let n = 1; n <= 10; n++) ev.append(el("option", { value: n }, n === 1 ? "Off (1x)" : n + "x XP event"));
+  ev.value = saved.xp_event ?? 1;
+  grid.append(el("div", {}, el("label", { for: "f_xp_event" }, "XP event multiplier"), ev));
+  const msg = el("div", { class: "err", role: "status" });
+  form.append(el("button", { class: "btn", type: "submit", style: "margin-top:20px" }, "Save XP settings"), msg);
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const value = { xp_event: parseInt(ev.value, 10) };
+    XP_FIELDS.forEach(([k]) => (value[k] = Math.max(0, parseInt(inputs[k].value, 10) || 0)));
+    if (value.message_xp_min > value.message_xp_max || value.reaction_xp_min > value.reaction_xp_max) {
+      msg.className = "err"; return (msg.textContent = "Minimum can't be higher than maximum.");
+    }
+    const { error } = await sb.from("bot_settings").upsert({ key: "xp", value, updated_by: user.id, updated_at: new Date().toISOString() });
+    msg.className = error ? "err" : "ok";
+    msg.textContent = error ? "Save failed: " + error.message : "Saved to Supabase.";
+  });
+  return [...head("Bot settings", "XP values and XP events."), form,
+    el("div", { class: "note" }, "Saved values are stored securely in Supabase. The bot applies them once the bot connection is added (Step 5). Until then, changes made here do not affect the bot.")];
+}
+
+const CMDS = [
+  ["Moderation (staff)", "/mod warn, warnings, clearwarnings, timeout, untimeout, kick, ban, unban, purge, lock, unlock, slowmode, nuke, unlockall, logchannel"],
+  ["Protection (staff)", "/automod dashboard, /antiraid dashboard, /antinuke dashboard"],
+  ["XP", "/xp view, leaderboard, status. Staff: set, channel, stop, x2 to x10"],
+  ["Clan wars (staff)", "/war create, result, history"],
+  ["Finding players", "/lfg post, /lfg clanwar (owner), /lfg setrole (staff), /rank"],
+  ["Tickets", "/tickets dashboard (staff), /tickets close"],
+  ["AFK", "/afk, /afksettings (staff)"],
+  ["Other", "/help"],
+];
+async function vCommands() {
+  return [...head("Commands", "Every slash command found in bot.py."),
+    el("div", { class: "cmds" }, CMDS.map(([t, d]) => el("div", { class: "card" }, el("h3", {}, t), el("p", {}, d)))),
+    el("div", { class: "note" }, "Read-only. Commands are defined in the bot's code, so they can't be switched on or off from here yet.")];
+}
+
+async function vLogs() {
+  const { data, error } = await sb.from("bot_logs").select("*").order("created_at", { ascending: false }).limit(100);
+  if (error) throw error;
+  const refresh = el("button", { class: "btn ghost", type: "button" }, "Refresh");
+  refresh.addEventListener("click", () => render("logs"));
+  const out = [...head("Logs", "Activity and errors the bot has sent. Newest first."), refresh];
+  if (!data.length) { out.push(el("div", { class: "note" }, "No logs yet. They appear here once the bot connection is added (Step 5).")); return out; }
+  const rows = data.map((r) => el("tr", {}, el("td", {}, new Date(r.created_at).toLocaleString()), el("td", { class: "lvl-" + r.level }, r.level), el("td", {}, r.message)));
+  out.push(el("div", { class: "card scroll", style: "margin-top:14px" }, el("table", {}, el("tr", {}, el("th", {}, "Time"), el("th", {}, "Level"), el("th", {}, "Message")), rows)));
+  return out;
+}
+
+async function vMod() {
+  return [...head("Moderation", "Controls for supported moderation functions."),
+    el("div", { class: "note" }, "Not connected yet. Banning, kicking and timeouts from this site need a secure command queue between the dashboard and the bot. That will be added after settings and logs are working. Until then, use the /mod commands in Discord.")];
+}
+async function vClan() {
+  return [...head("Clan management", "Space for future 4EV features."),
+    el("div", { class: "note" }, "Not connected yet. War history and the XP leaderboard live in the bot's data file, so they need the bot to sync them to Supabase first.")];
+}
+
+/* ---------- start ---------- */
+sb.auth.getSession().then(({ data }) => enter(data.session));
+</script>
+</body>
+</html>
