@@ -1,263 +1,276 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="robots" content="noindex,nofollow">
-<title>4EV Control</title>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex"><title>4EV | Forever Victory</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚔️</text></svg>">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#050505;--panel:#0f0e0b;--line:#2a2412;--gold:#e5b83a;--gold-hi:#ffd86b;--gold-lo:#8a6d1f;--text:#f3ecd8;--mute:#9a9078;--ok:#4ade80;--bad:#f87171;--warn:#fbbf24;
---head:"Rajdhani","Arial Narrow",sans-serif;--body:"Manrope",system-ui,sans-serif;box-sizing:border-box}
-*,*::before,*::after{box-sizing:inherit}
-html,body{height:100%;margin:0}
-body{background:radial-gradient(900px 500px at 80% -10%,rgba(229,184,58,.10),transparent 60%),var(--bg);color:var(--text);font:15px/1.5 var(--body);padding-top:env(safe-area-inset-top,0px)}
-h1,h2,h3{font-family:var(--head);margin:0;letter-spacing:.02em}
-button,input,select{font:inherit;color:inherit}
-:focus-visible{outline:2px solid var(--gold-hi);outline-offset:2px}
-.hidden{display:none!important}
-#login{min-height:100%;display:grid;place-items:center;padding:24px}
-.login-card{width:100%;max-width:380px;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:32px 26px;box-shadow:0 0 60px rgba(229,184,58,.08)}
-.logo{font-family:var(--head);font-weight:700;font-size:64px;line-height:1;color:var(--gold);text-shadow:0 0 28px rgba(229,184,58,.55);animation:glow 3.2s ease-in-out infinite}
-.sub{color:var(--mute);margin:4px 0 24px}
-@keyframes glow{50%{text-shadow:0 0 44px rgba(255,216,107,.85)}}
+:root{--bg:#03020a;--panel:rgba(14,11,32,.8);--line:#2a2252;--gold:#8b5cf6;--gold-hi:#67e8f9;--gold-lo:#5b3fd1;--text:#ecebff;--mute:#9a97b8;--ok:#4ade80;--bad:#f87171;--warn:#fbbf24;--head:"Rajdhani","Arial Narrow",sans-serif;--body:"Manrope",system-ui,sans-serif;box-sizing:border-box}
+*,*::before,*::after{box-sizing:inherit}html{scroll-behavior:smooth}html,body{margin:0}
+body{background:var(--bg);color:var(--text);font:15px/1.55 var(--body);overflow-x:hidden;padding-top:env(safe-area-inset-top,0px)}
+#fx{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;transition:opacity .6s}
+#bar{position:fixed;top:0;left:0;height:3px;width:0;z-index:60;background:linear-gradient(90deg,var(--gold-lo),var(--gold-hi));box-shadow:0 0 12px var(--gold)}
+h1,h2,h3{font-family:var(--head);margin:0}button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--gold-hi);outline-offset:2px}.hidden{display:none!important}
+#intro{position:fixed;inset:0;z-index:100;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .9s,visibility .9s;cursor:pointer}
+#intro.out{opacity:0;visibility:hidden}
+.il{display:flex;font:700 clamp(100px,30vw,240px)/1 var(--head);position:relative;overflow:hidden;padding:0 .1em}
+.il span{background:linear-gradient(180deg,var(--gold-hi),var(--gold-lo));-webkit-background-clip:text;background-clip:text;color:transparent;opacity:0;animation:rise 1s cubic-bezier(.2,.8,.2,1) forwards}
+.il span:nth-child(2){animation-delay:.3s}.il span:nth-child(3){animation-delay:.6s}
+.il::after{content:"";position:absolute;top:0;bottom:0;width:30%;left:-40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.6),transparent);transform:skewX(-20deg);animation:sweep 1.2s 1.5s forwards}
+.is{font:600 clamp(14px,4vw,26px) var(--head);color:var(--gold);letter-spacing:.1em;opacity:0;animation:track 1.6s 1.1s forwards}
+@keyframes rise{from{opacity:0;transform:translateY(60px) scale(.5)}to{opacity:1;transform:none}}
+@keyframes sweep{to{left:130%}}@keyframes track{to{opacity:1;letter-spacing:.5em}}
+section,footer{position:relative;z-index:1}
+.top{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:calc(10px + env(safe-area-inset-top,0px)) 20px 10px;backdrop-filter:blur(12px);background:rgba(3,2,10,.55);border-bottom:1px solid rgba(139,92,246,.12)}
+.brand{font:700 28px var(--head);color:var(--gold);text-shadow:0 0 16px rgba(139,92,246,.5)}
+.hero{min-height:100svh;display:grid;place-items:center;text-align:center;padding:100px 20px 60px}
+.glow{position:absolute;width:min(700px,90vw);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(139,92,246,.22),transparent 65%);animation:pulse 5s ease-in-out infinite}
+@keyframes pulse{50%{transform:scale(1.15);opacity:.7}}
+.hero-in{position:relative}
+.hero h1{font-size:clamp(90px,24vw,200px);line-height:.9;background:linear-gradient(180deg,#fff2c4,var(--gold) 45%,var(--gold-lo));-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 40px rgba(139,92,246,.45))}
+.tag{font:600 clamp(18px,4.5vw,30px) var(--head);letter-spacing:.35em;color:var(--gold-hi)}
+.words{min-height:1.6em;color:var(--mute);margin:14px 0 26px;transition:opacity .4s}
+.cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:linear-gradient(180deg,var(--gold-hi),var(--gold));color:#1a1403;font-weight:800;border:0;border-radius:12px;padding:12px 22px;min-height:44px;cursor:pointer;transition:box-shadow .25s,transform .15s}
+.btn::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.6),transparent 70%);transform:translateX(-120%);transition:transform .6s}
+.btn:hover::after{transform:translateX(120%)}.btn:hover{box-shadow:0 0 30px rgba(139,92,246,.6);transform:translateY(-2px)}
+.btn.ghost{background:transparent;color:var(--gold-hi);border:1px solid var(--gold-lo)}.btn.sm{padding:8px 16px;min-height:40px}
+.mq{overflow:hidden;border-block:1px solid var(--line);background:rgba(8,6,20,.75);padding:14px 0;position:relative;z-index:1}
+.mq div{display:flex;gap:40px;width:max-content;animation:mq 30s linear infinite;font:700 22px var(--head);color:var(--gold);letter-spacing:.12em;white-space:nowrap}
+@keyframes mq{to{transform:translateX(-50%)}}
+.wrap{max-width:1100px;margin:0 auto;padding:80px 20px}
+.sec h2{font-size:clamp(34px,7vw,56px);text-align:center;color:var(--gold-hi);margin-bottom:8px}
+.lead{text-align:center;color:var(--mute);margin:0 auto 40px;max-width:560px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.stat{text-align:center}.stat b{display:block;font:700 56px var(--head);color:var(--gold-hi);text-shadow:0 0 24px rgba(139,92,246,.5)}
+.feats{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.card{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;overflow:hidden;transition:border-color .3s}
+.tilt::before{content:"";position:absolute;inset:0;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(139,92,246,.2),transparent 60%);opacity:0;transition:opacity .3s}
+.tilt:hover{border-color:var(--gold)}.tilt:hover::before{opacity:1}
+.ico{font-size:34px;display:block;margin-bottom:8px;animation:float 4s ease-in-out infinite}@keyframes float{50%{transform:translateY(-6px)}}
+.card h3{font-size:24px;color:var(--gold-hi)}.card p{margin:6px 0 0;color:var(--mute)}
+.rv{opacity:0;transform:translateY(40px) scale(.96);transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1);transition-delay:var(--d,0s)}
+.rv.in{opacity:1;transform:none}
+.rv.in.tilt{transform:perspective(800px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .15s,opacity .8s,border-color .3s;transition-delay:0s}
+footer{text-align:center;color:var(--mute);padding:40px 20px 60px;border-top:1px solid var(--line)}
+.modal{position:fixed;inset:0;z-index:90;display:grid;place-items:center;padding:20px;background:rgba(0,0,0,.78);backdrop-filter:blur(8px)}
+.mcard{width:100%;max-width:380px;background:#0b0919;border:1px solid var(--line);border-radius:18px;padding:30px 26px;box-shadow:0 0 70px rgba(139,92,246,.15);animation:up .5s both}
+.logo{font:700 60px/1 var(--head);color:var(--gold);text-shadow:0 0 28px rgba(139,92,246,.55)}
 label{display:block;font-size:13px;color:var(--mute);margin:14px 0 6px}
 input,select{width:100%;background:#000;border:1px solid var(--line);border-radius:10px;padding:11px 12px;min-height:44px}
-input:focus,select:focus{border-color:var(--gold)}
-.btn{background:linear-gradient(180deg,var(--gold-hi),var(--gold));color:#1a1403;font-weight:700;border:0;border-radius:10px;padding:11px 18px;min-height:44px;cursor:pointer;transition:box-shadow .2s,transform .1s}
-.btn:hover{box-shadow:0 0 22px rgba(229,184,58,.5)}.btn:active{transform:scale(.98)}
-.btn.ghost{background:transparent;color:var(--gold);border:1px solid var(--gold-lo)}
-.btn.full{width:100%;margin-top:22px}
-.err{color:var(--bad);min-height:20px;margin-top:12px;font-size:14px}
-#app{display:grid;grid-template-columns:230px 1fr;min-height:100%}
-nav{background:#080806;border-right:1px solid var(--line);padding:22px 14px;display:flex;flex-direction:column;gap:6px;position:sticky;top:0;height:100vh}
-nav .brand{font-family:var(--head);font-size:30px;font-weight:700;color:var(--gold);padding:0 10px 14px;text-shadow:0 0 18px rgba(229,184,58,.4)}
-nav .brand small{display:block;font-size:13px;color:var(--mute);font-weight:500;text-shadow:none}
-.nav-btn{background:none;border:1px solid transparent;border-radius:10px;text-align:left;padding:10px 12px;min-height:44px;color:var(--mute);cursor:pointer;display:flex;gap:10px;align-items:center;transition:.2s}
-.nav-btn:hover{color:var(--text)}
-.nav-btn.on{color:var(--gold-hi);background:rgba(229,184,58,.08);border-color:var(--gold-lo);box-shadow:0 0 18px rgba(229,184,58,.12)}
-.spacer{flex:1}
-main{padding:28px;max-width:1000px;width:100%}
-h1{font-size:34px;color:var(--gold-hi);margin-bottom:4px}
-.lead{color:var(--mute);margin:0 0 22px}
+input:focus,select:focus{border-color:var(--gold)}.err{color:var(--bad);min-height:20px;margin-top:10px;font-size:14px}.ok{color:var(--ok);margin-top:10px}
+#app{display:grid;grid-template-columns:230px 1fr;min-height:100vh;position:relative;z-index:1}
+nav{background:rgba(6,5,16,.9);border-right:1px solid var(--line);padding:22px 14px;display:flex;flex-direction:column;gap:6px;position:sticky;top:0;height:100vh}
+nav .bn{font:700 30px var(--head);color:var(--gold);padding:0 10px 14px;text-shadow:0 0 18px rgba(139,92,246,.4)}
+.nb{background:none;border:1px solid transparent;border-radius:10px;text-align:left;padding:10px 12px;min-height:44px;color:var(--mute);cursor:pointer;display:flex;gap:10px;align-items:center;transition:.2s}
+.nb:hover{color:var(--text);transform:translateX(3px)}.nb.on{color:var(--gold-hi);background:rgba(139,92,246,.08);border-color:var(--gold-lo);box-shadow:0 0 18px rgba(139,92,246,.15)}
+.sp{flex:1}main{padding:28px;max-width:1000px;width:100%}
+.ph{font-size:34px;color:var(--gold-hi);margin:0 0 4px}.lead2{color:var(--mute);margin:0 0 20px}
+#view>*{animation:up .6s both}#view>:nth-child(2){animation-delay:.08s}#view>:nth-child(3){animation-delay:.16s}#view>:nth-child(4){animation-delay:.24s}#view>:nth-child(5){animation-delay:.32s}
+@keyframes up{from{opacity:0;transform:translateY(18px)}}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px}
-.card h3{font-size:15px;color:var(--mute);font-weight:600}
-.big{font-family:var(--head);font-size:38px;font-weight:700;color:var(--gold-hi)}
+.card h3.s{font-size:15px;color:var(--mute);font-weight:600}.big{font:700 38px var(--head);color:var(--gold-hi)}
 .pill{display:inline-flex;align-items:center;gap:8px;padding:4px 12px;border-radius:99px;border:1px solid var(--line);font-weight:700}
-.dot{width:10px;height:10px;border-radius:50%;background:var(--bad);box-shadow:0 0 10px var(--bad)}
-.dot.on{background:var(--ok);box-shadow:0 0 12px var(--ok)}
-.note{border-left:3px solid var(--gold-lo);padding:10px 14px;background:rgba(229,184,58,.05);border-radius:0 10px 10px 0;color:var(--mute);margin:16px 0}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--bad);box-shadow:0 0 10px var(--bad)}.dot.on{background:var(--ok);box-shadow:0 0 12px var(--ok);animation:pulse 1.6s infinite}
+.note{border-left:3px solid var(--gold-lo);padding:10px 14px;background:rgba(139,92,246,.05);border-radius:0 10px 10px 0;color:var(--mute);margin:16px 0}
 .form{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:4px 16px}
-.ok{color:var(--ok)}
-table{width:100%;border-collapse:collapse}
-td,th{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
-th{color:var(--mute);font-weight:600;font-size:13px}
-.scroll{overflow-x:auto}
-.lvl-info{color:var(--gold-hi)}.lvl-warning{color:var(--warn)}.lvl-error{color:var(--bad)}
-code{background:#000;border:1px solid var(--line);border-radius:6px;padding:1px 6px;color:var(--gold-hi)}
-.cmds{display:grid;gap:10px}
-.cmds .card{padding:14px 18px}
-.cmds p{margin:6px 0 0;color:var(--mute);line-height:2}
-@media (max-width:800px){
- #app{display:block;padding-bottom:calc(72px + env(safe-area-inset-bottom,0px))}
- nav{position:fixed;left:0;right:0;bottom:0;top:auto;height:auto;flex-direction:row;justify-content:space-around;padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px));border-right:0;border-top:1px solid var(--line);z-index:5;gap:2px}
- nav .brand,.spacer,.nav-btn .lbl-long{display:none}
- .nav-btn{flex-direction:column;gap:2px;padding:6px 4px;font-size:11px;flex:1;justify-content:center;text-align:center}
- .nav-btn .ico{font-size:18px}
- main{padding:20px 16px}
- h1{font-size:28px}
- .mobile-out{display:inline-block!important}
-}
-.mobile-out{display:none}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-</style>
-</head>
-<body>
+table{width:100%;border-collapse:collapse}td,th{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{color:var(--mute);font-size:13px}
+.sc{overflow-x:auto}.lvl-info{color:var(--gold-hi)}.lvl-warning{color:var(--warn)}.lvl-error{color:var(--bad)}
+.cmds{display:grid;gap:10px}.cmds p{margin:6px 0 0;color:var(--mute);line-height:1.9}
+.bar{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}.bar>*{flex:1 1 150px;width:auto}
+.msg{display:flex;gap:12px;padding:12px 4px;border-bottom:1px solid var(--line)}.msg.nw{animation:pop .7s}
+.msg img{width:40px;height:40px;border-radius:50%;flex:none;background:#000;border:1px solid var(--gold-lo)}
+.meta{font-size:13px;color:var(--mute)}.meta b{color:var(--gold-hi)}.msg p{margin:2px 0 0;white-space:pre-wrap;word-break:break-word}
+.msg.del p{text-decoration:line-through;opacity:.5}.tg{font-size:11px;border:1px solid var(--line);border-radius:6px;padding:0 6px;margin-left:6px}
+@keyframes pop{from{opacity:0;transform:translateY(-12px);background:rgba(139,92,246,.2)}}
+@media (max-width:800px){#app{display:block;padding-bottom:calc(70px + env(safe-area-inset-bottom,0px))}
+nav{position:fixed;left:0;right:0;bottom:0;top:auto;height:auto;flex-direction:row;justify-content:space-around;padding:6px 4px calc(6px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);border-right:0;z-index:5;gap:0}
+nav .bn,.sp,.lbl{display:none}.nb{flex:1;justify-content:center;padding:8px 0;font-size:20px}main{padding:20px 16px}.ph{font-size:28px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
 
-<section id="login">
-  <form class="login-card" id="login-form" autocomplete="on">
-    <div class="logo">4EV</div>
-    <p class="sub">Forever Victory control room. Owners only.</p>
-    <label for="email">Email</label>
-    <input id="email" type="email" autocomplete="username" required>
-    <label for="pw">Password</label>
-    <input id="pw" type="password" autocomplete="current-password" required>
-    <button class="btn full" type="submit">Sign in</button>
-    <div class="err" id="login-err" role="alert"></div>
-  </form>
-</section>
+body::before{content:"";position:fixed;inset:-20%;z-index:0;pointer-events:none;filter:blur(40px);
+background:radial-gradient(40% 40% at 20% 30%,rgba(124,58,237,.45),transparent 70%),radial-gradient(35% 35% at 80% 20%,rgba(34,211,238,.32),transparent 70%),radial-gradient(45% 45% at 60% 85%,rgba(236,72,153,.36),transparent 70%);animation:neb 24s ease-in-out infinite alternate}
+@keyframes neb{to{transform:translate3d(5%,-4%,0) rotate(10deg) scale(1.2);filter:blur(40px) hue-rotate(70deg)}}
+@keyframes flow{to{background-position:300% 0}}
+#site{transition:opacity 1.6s ease}body.pre #site{opacity:0}
+#intro{background:radial-gradient(ellipse at center,transparent 25%,rgba(3,2,10,.9) 100%);transition:opacity 1.2s ease,visibility 1.2s}
+.il{overflow:visible;filter:drop-shadow(0 0 36px rgba(139,92,246,.8)) drop-shadow(0 0 90px rgba(34,211,238,.4));transition:transform 1.4s cubic-bezier(.6,0,.9,.5),opacity 1s ease .2s}
+.il::after{display:none}
+.il span,.hero h1{background:linear-gradient(90deg,#67e8f9,#a78bfa,#f472b6,#67e8f9);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent}
+.il span{opacity:0;animation:reveal 1.9s cubic-bezier(.16,1,.3,1) forwards,flow 5s linear infinite}
+.il span:nth-child(2){animation-delay:.35s,0s}.il span:nth-child(3){animation-delay:.7s,0s}
+@keyframes reveal{from{opacity:0;transform:scale(2.6);filter:blur(28px)}55%{opacity:1}to{opacity:1;transform:none;filter:blur(0)}}
+.is,.tag{background:linear-gradient(90deg,#67e8f9,#f472b6);-webkit-background-clip:text;background-clip:text;color:transparent}
+.is{animation:track 2.2s 1.4s cubic-bezier(.16,1,.3,1) forwards}
+#intro.go .il{transform:scale(14);opacity:0}#intro.go .is{opacity:0;transition:opacity .5s}
+.hero h1{animation:flow 7s linear infinite;filter:drop-shadow(0 0 40px rgba(139,92,246,.6))}
+.btn{background:linear-gradient(120deg,#22d3ee,#8b5cf6,#ec4899);background-size:200% 100%;color:#fff;transition:background-position .6s,box-shadow .25s,transform .15s}
+.btn:hover{background-position:100% 0;box-shadow:0 0 34px rgba(139,92,246,.7),0 0 60px rgba(34,211,238,.3)}
+.btn.ghost{background:transparent;color:#c7bfff;border:1px solid rgba(139,92,246,.6)}
+.card{border:1px solid transparent;background:linear-gradient(rgba(12,10,28,.82),rgba(12,10,28,.82)) padding-box,linear-gradient(120deg,rgba(103,232,249,.55),rgba(167,139,250,.5),rgba(244,114,182,.55)) border-box;backdrop-filter:blur(10px)}
+.sec h2{background:linear-gradient(90deg,#67e8f9,#f472b6);-webkit-background-clip:text;background-clip:text;color:transparent}
 
-<div id="app" class="hidden">
-  <nav>
-    <div class="brand">4EV<small>Forever Victory</small></div>
-    <button class="nav-btn on" data-view="overview"><span class="ico">📊</span><span>Overview</span></button>
-    <button class="nav-btn" data-view="settings"><span class="ico">⚙️</span><span>Settings</span></button>
-    <button class="nav-btn" data-view="commands"><span class="ico">⌨️</span><span>Commands</span></button>
-    <button class="nav-btn" data-view="logs"><span class="ico">📜</span><span>Logs</span></button>
-    <button class="nav-btn" data-view="moderation"><span class="ico">🛡️</span><span>Moderation</span></button>
-    <button class="nav-btn" data-view="clan"><span class="ico">⚔️</span><span>Clan</span></button>
-    <div class="spacer"></div>
-    <button class="nav-btn" id="logout"><span class="ico">🚪</span><span>Sign out</span></button>
-  </nav>
-  <main id="view"></main>
+#spot{position:fixed;left:0;top:0;width:520px;height:520px;margin:-260px 0 0 -260px;z-index:0;pointer-events:none;background:radial-gradient(circle,rgba(139,92,246,.22),rgba(34,211,238,.08) 45%,transparent 70%);transition:opacity .4s}
+#intro{transition:opacity .7s ease,visibility .7s}.il{transition:transform .9s cubic-bezier(.6,0,.9,.5),opacity .7s ease .1s}
+.il span{animation:reveal 1s cubic-bezier(.16,1,.3,1) forwards,flow 5s linear infinite}.il span:nth-child(2){animation-delay:.12s,0s}.il span:nth-child(3){animation-delay:.24s,0s}
+.is{animation:track 1.2s .5s cubic-bezier(.16,1,.3,1) forwards}#site{transition:opacity .8s ease}
+.rv{transition:opacity .55s cubic-bezier(.2,.8,.2,1),transform .55s cubic-bezier(.2,.8,.2,1);transition-delay:var(--d,0s)}
+.btn{transform:translate(var(--tx,0px),var(--ty,0px))}.btn:hover{transform:translate(var(--tx,0px),calc(var(--ty,0px) - 2px))}
+.play{display:grid;grid-template-columns:1.4fr 1fr;gap:18px}@media (max-width:800px){.play{grid-template-columns:1fr}}
+.chat{height:340px;overflow-y:auto;display:flex;flex-direction:column;gap:10px}
+.cm{display:flex;gap:10px;animation:slide .25s both}.cm .av{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#22d3ee,#8b5cf6);flex:none}
+.cm .tx{background:rgba(255,255,255,.06);border-radius:10px;padding:6px 10px;word-break:break-word}
+.cm.bad .tx{animation:shake .4s,flash 1s;text-decoration:line-through;opacity:.45}
+.cm.bot .av{background:linear-gradient(135deg,#ec4899,#8b5cf6)}.cm.bot .tx{border:1px solid rgba(236,72,153,.55);color:#ffd0ea}
+@keyframes slide{from{opacity:0;transform:translateY(12px) scale(.97)}}@keyframes shake{25%{transform:translateX(-8px)}50%{transform:translateX(8px)}75%{transform:translateX(-4px)}}
+@keyframes flash{0%{box-shadow:0 0 0 0 rgba(248,113,113,.9)}100%{box-shadow:0 0 0 22px transparent}}
+.row{display:flex;gap:8px;margin-top:12px}.row input{flex:1}.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.chip{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:99px;padding:7px 14px;cursor:pointer;min-height:36px;transition:.2s}
+.chip:hover{border-color:var(--gold-hi);transform:translateY(-2px)}.chip.on{background:rgba(139,92,246,.3);border-color:var(--gold);box-shadow:0 0 16px rgba(139,92,246,.5)}
+.le{font-size:13px;color:#ffd0ea;padding:5px 0;border-bottom:1px solid var(--line);animation:slide .3s both}#dlog{max-height:190px;overflow:auto;margin-top:6px}
+input[type=range]{padding:0;min-height:30px;accent-color:#8b5cf6;margin-top:12px}.xb{height:10px;border-radius:9px;background:#000;overflow:hidden;margin-top:10px}
+.xb i{display:block;height:100%;width:10%;background:linear-gradient(90deg,#22d3ee,#8b5cf6,#ec4899);transition:width .4s cubic-bezier(.2,.8,.2,1)}
+</style></head><body class="pre">
+<canvas id="fx"></canvas><div id="spot"></div><div id="bar"></div>
+<div id="intro"><div class="il"><span>4</span><span>E</span><span>V</span></div><div class="is">FOREVER VICTORY</div></div>
+<div id="site">
+<header class="top"><b class="brand">4EV</b><button class="btn sm" id="ob">Owner login</button></header>
+<section class="hero"><div class="glow"></div><div class="hero-in"><h1>4EV</h1><div class="tag">FOREVER VICTORY</div><div class="words" id="words">XP &amp; levels</div>
+<div class="cta"><a class="btn" href="#features">What the bot does</a><a class="btn ghost" href="#play">Try AutoMod live</a><button class="btn ghost" id="ob2">Owner login</button></div></div></section>
+<div class="mq"><div id="mq"></div></div>
+<section class="wrap sec"><div class="stats" id="stats"></div></section>
+<section class="wrap sec" id="features"><h2 class="rv">Built to win</h2><p class="lead rv">Everything the 4EV bot does for the clan.</p><div class="feats" id="feats"></div></section>
+<section class="wrap sec" id="play"><h2 class="rv">Try it yourself</h2><p class="lead rv">A live simulation of 4EV AutoMod using the bot's default rules. Type, spam, shout, paste links and watch it fight back. It runs in your browser and sends nothing to Discord.</p>
+<div class="play rv"><div class="card"><div class="chat" id="chat"></div><div class="row"><input id="ci" maxlength="200" placeholder="Type a message and press Enter" autocomplete="off"><button class="btn" id="cs" type="button">Send</button></div><div class="chips" id="quick"></div></div>
+<div class="card"><h3>Filters (tap to toggle)</h3><div class="chips" id="flt"></div><h3 style="margin-top:16px">AutoMod log</h3><div id="dlog"></div><p id="dstat" style="color:var(--mute);margin:8px 0 0">Blocked: 0</p></div></div>
+<div class="card rv" style="margin-top:18px"><h3>Level lab</h3><p>Slide to see what a level takes in the real 4EV XP system.</p><input type="range" id="lv" min="1" max="100" value="10">
+<div class="big" id="lt" style="margin-top:8px">WARRIOR</div><div id="ln" style="color:var(--mute)"></div><div class="xb"><i id="lb"></i></div></div></section>
+<footer>4EV | Forever Victory &middot; Private clan control room</footer>
 </div>
-
+<div id="app" class="hidden"><nav id="nav"></nav><main id="view"></main></div>
+<div class="modal hidden" id="lm"><form class="mcard" id="lf"><div class="logo">4EV</div><p style="color:var(--mute);margin:4px 0 0">Owners only.</p>
+<label for="em">Email</label><input id="em" type="email" autocomplete="username" required>
+<label for="pw">Password</label><input id="pw" type="password" autocomplete="current-password" required>
+<button class="btn" style="width:100%;margin-top:20px" type="submit">Sign in</button><div class="err" id="le" role="alert"></div>
+<button class="btn ghost sm" style="width:100%" type="button" id="lx">Cancel</button></form></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 <script>
-const SB_URL = "https://gclwpuhozlvnzzcoaifs.supabase.co";
-const SB_KEY = "sb_publishable_7pWrjwxnQls1bdfmzx80Ug_Z1K4DIET"; // public key, safe here. NEVER put the secret/service_role key in this file.
-const sb = supabase.createClient(SB_URL, SB_KEY);
-const $ = (s) => document.querySelector(s);
-let user = null, current = "overview";
-
-function el(tag, props, ...kids) {
-  const n = document.createElement(tag);
-  Object.entries(props || {}).forEach(([k, v]) => (k === "class" ? (n.className = v) : n.setAttribute(k, v)));
-  kids.flat().forEach((k) => n.append(k instanceof Node ? k : document.createTextNode(k)));
-  return n;
-}
-function head(title, lead) {
-  return [el("h1", {}, title), el("p", { class: "lead" }, lead)];
-}
-
-/* ---------- auth ---------- */
-async function enter(session) {
-  if (!session) return show(false);
-  const { data, error } = await sb.from("dashboard_users").select("role").eq("user_id", session.user.id).maybeSingle();
-  if (error || !data) {
-    await sb.auth.signOut();
-    $("#login-err").textContent = "This account is not authorised for the 4EV dashboard.";
-    return show(false);
-  }
-  user = session.user;
-  show(true);
-  render(current);
-}
-function show(loggedIn) {
-  $("#login").classList.toggle("hidden", loggedIn);
-  $("#app").classList.toggle("hidden", !loggedIn);
-}
-$("#login-form").addEventListener("submit", async (e) => {
-  e.preventDefault();
-  $("#login-err").textContent = "";
-  const { data, error } = await sb.auth.signInWithPassword({ email: $("#email").value.trim(), password: $("#pw").value });
-  if (error) return ($("#login-err").textContent = "Wrong email or password.");
-  enter(data.session);
-});
-$("#logout").addEventListener("click", async () => { await sb.auth.signOut(); user = null; $("#pw").value = ""; show(false); });
-document.querySelectorAll("[data-view]").forEach((b) =>
-  b.addEventListener("click", () => {
-    document.querySelectorAll("[data-view]").forEach((x) => x.classList.toggle("on", x === b));
-    current = b.dataset.view; render(current);
-  })
-);
-
-/* ---------- views ---------- */
-async function render(v) {
-  const m = $("#view");
-  m.replaceChildren(el("p", { class: "lead" }, "Loading..."));
-  const fn = { overview: vOverview, settings: vSettings, commands: vCommands, logs: vLogs, moderation: vMod, clan: vClan }[v];
-  try { m.replaceChildren(...(await fn())); }
-  catch (e) { m.replaceChildren(el("p", { class: "err" }, "Could not load this page: " + e.message)); }
-}
-
-async function vOverview() {
-  const { data, error } = await sb.from("bot_status").select("*").eq("id", 1).maybeSingle();
-  if (error) throw error;
-  const beat = data && data.last_heartbeat ? new Date(data.last_heartbeat) : null;
-  const online = beat && Date.now() - beat.getTime() < 150000;
-  const stat = (t, v) => el("div", { class: "card" }, el("h3", {}, t), el("div", { class: "big" }, v == null ? "-" : String(v)));
-  const out = [...head("Overview", "Live status reported by the bot on Wispbyte.")];
-  out.push(el("div", { class: "grid" },
-    el("div", { class: "card" }, el("h3", {}, "Bot status"),
-      el("div", { class: "pill" }, el("span", { class: "dot" + (online ? " on" : "") }), online ? "Online" : "Offline")),
-    stat("Servers", data && data.guild_count), stat("Members", data && data.member_count),
-    stat("Latency", data && data.latency_ms != null ? data.latency_ms + " ms" : null)));
-  out.push(el("div", { class: "note" }, beat
-    ? "Last heartbeat: " + beat.toLocaleString() + ". Counts to Offline after 2.5 minutes without one."
-    : "The bot has not reported yet. These numbers stay empty until the bot connection is added (Step 5)."));
-  return out;
-}
-
-const XP_FIELDS = [
-  ["message_xp_min", "Message XP minimum", 8], ["message_xp_max", "Message XP maximum", 15],
-  ["reaction_xp_min", "Reaction XP minimum", 3], ["reaction_xp_max", "Reaction XP maximum", 8],
-  ["vc_xp_normal", "Voice XP per minute (members)", 50], ["vc_xp_staff", "Voice XP per minute (staff)", 100],
-];
-async function vSettings() {
-  const { data, error } = await sb.from("bot_settings").select("value,updated_at").eq("key", "xp").maybeSingle();
-  if (error) throw error;
-  const saved = (data && data.value) || {};
-  const form = el("form", { class: "card" }, el("div", { class: "form" }));
-  const grid = form.firstChild, inputs = {};
-  XP_FIELDS.forEach(([k, label, def]) => {
-    const i = el("input", { type: "number", min: "0", max: "100000", id: "f_" + k, value: saved[k] ?? def });
-    inputs[k] = i; grid.append(el("div", {}, el("label", { for: "f_" + k }, label), i));
-  });
-  const ev = el("select", { id: "f_xp_event" });
-  for (let n = 1; n <= 10; n++) ev.append(el("option", { value: n }, n === 1 ? "Off (1x)" : n + "x XP event"));
-  ev.value = saved.xp_event ?? 1;
-  grid.append(el("div", {}, el("label", { for: "f_xp_event" }, "XP event multiplier"), ev));
-  const msg = el("div", { class: "err", role: "status" });
-  form.append(el("button", { class: "btn", type: "submit", style: "margin-top:20px" }, "Save XP settings"), msg);
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const value = { xp_event: parseInt(ev.value, 10) };
-    XP_FIELDS.forEach(([k]) => (value[k] = Math.max(0, parseInt(inputs[k].value, 10) || 0)));
-    if (value.message_xp_min > value.message_xp_max || value.reaction_xp_min > value.reaction_xp_max) {
-      msg.className = "err"; return (msg.textContent = "Minimum can't be higher than maximum.");
-    }
-    const { error } = await sb.from("bot_settings").upsert({ key: "xp", value, updated_by: user.id, updated_at: new Date().toISOString() });
-    msg.className = error ? "err" : "ok";
-    msg.textContent = error ? "Save failed: " + error.message : "Saved to Supabase.";
-  });
-  return [...head("Bot settings", "XP values and XP events."), form,
-    el("div", { class: "note" }, "Saved values are stored securely in Supabase. The bot applies them once the bot connection is added (Step 5). Until then, changes made here do not affect the bot.")];
-}
-
-const CMDS = [
-  ["Moderation (staff)", "/mod warn, warnings, clearwarnings, timeout, untimeout, kick, ban, unban, purge, lock, unlock, slowmode, nuke, unlockall, logchannel"],
-  ["Protection (staff)", "/automod dashboard, /antiraid dashboard, /antinuke dashboard"],
-  ["XP", "/xp view, leaderboard, status. Staff: set, channel, stop, x2 to x10"],
-  ["Clan wars (staff)", "/war create, result, history"],
-  ["Finding players", "/lfg post, /lfg clanwar (owner), /lfg setrole (staff), /rank"],
-  ["Tickets", "/tickets dashboard (staff), /tickets close"],
-  ["AFK", "/afk, /afksettings (staff)"],
-  ["Other", "/help"],
-];
-async function vCommands() {
-  return [...head("Commands", "Every slash command found in bot.py."),
-    el("div", { class: "cmds" }, CMDS.map(([t, d]) => el("div", { class: "card" }, el("h3", {}, t), el("p", {}, d)))),
-    el("div", { class: "note" }, "Read-only. Commands are defined in the bot's code, so they can't be switched on or off from here yet.")];
-}
-
-async function vLogs() {
-  const { data, error } = await sb.from("bot_logs").select("*").order("created_at", { ascending: false }).limit(100);
-  if (error) throw error;
-  const refresh = el("button", { class: "btn ghost", type: "button" }, "Refresh");
-  refresh.addEventListener("click", () => render("logs"));
-  const out = [...head("Logs", "Activity and errors the bot has sent. Newest first."), refresh];
-  if (!data.length) { out.push(el("div", { class: "note" }, "No logs yet. They appear here once the bot connection is added (Step 5).")); return out; }
-  const rows = data.map((r) => el("tr", {}, el("td", {}, new Date(r.created_at).toLocaleString()), el("td", { class: "lvl-" + r.level }, r.level), el("td", {}, r.message)));
-  out.push(el("div", { class: "card scroll", style: "margin-top:14px" }, el("table", {}, el("tr", {}, el("th", {}, "Time"), el("th", {}, "Level"), el("th", {}, "Message")), rows)));
-  return out;
-}
-
-async function vMod() {
-  return [...head("Moderation", "Controls for supported moderation functions."),
-    el("div", { class: "note" }, "Not connected yet. Banning, kicking and timeouts from this site need a secure command queue between the dashboard and the bot. That will be added after settings and logs are working. Until then, use the /mod commands in Discord.")];
-}
-async function vClan() {
-  return [...head("Clan management", "Space for future 4EV features."),
-    el("div", { class: "note" }, "Not connected yet. War history and the XP leaderboard live in the bot's data file, so they need the bot to sync them to Supabase first.")];
-}
-
-/* ---------- start ---------- */
-sb.auth.getSession().then(({ data }) => enter(data.session));
-</script>
-</body>
-</html>
+const SB_URL="https://gclwpuhozlvnzzcoaifs.supabase.co",SB_KEY="sb_publishable_7pWrjwxnQls1bdfmzx80Ug_Z1K4DIET"; // public key. NEVER put the secret key here.
+const sb=supabase.createClient(SB_URL,SB_KEY),$=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],RM=matchMedia("(prefers-reduced-motion:reduce)").matches;
+let user=null,cur="overview",rt=null,poll=null;
+const el=(t,p,...k)=>{const n=document.createElement(t);for(const[a,v]of Object.entries(p||{})){if(a==="class")n.className=v;else n.setAttribute(a,v)}k.flat().forEach(x=>n.append(x instanceof Node?x:document.createTextNode(x)));return n};
+const head=(t,l)=>[el("h1",{class:"ph"},t),el("p",{class:"lead2"},l)];
+/* starfield + intro */
+const cv=$("#fx"),cx=cv.getContext("2d");let W_,H_,mx=0,my=0,sp=RM?.12:2.4,tg=sp;
+const fit=()=>{W_=cv.width=innerWidth;H_=cv.height=innerHeight};fit();addEventListener("resize",fit);
+const HU=[190,265,315,210],ST=Array.from({length:RM?120:380},()=>({x:Math.random()*2-1,y:Math.random()*2-1,z:Math.random()*.95+.05,h:HU[Math.random()*4|0]}));
+addEventListener("pointermove",e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5});
+(function tick(){sp+=(tg-sp)*.035;cx.clearRect(0,0,W_,H_);const f=Math.max(W_,H_)*.25,ox=W_/2-mx*40,oy=H_/2-my*40;cx.lineCap="round";
+for(const s of ST){const pz=s.z;s.z-=sp*.01;if(s.z<=.02){s.x=Math.random()*2-1;s.y=Math.random()*2-1;s.z=1;continue}
+const x1=ox+s.x/pz*f,y1=oy+s.y/pz*f,x2=ox+s.x/s.z*f,y2=oy+s.y/s.z*f;
+if(x2<-50||x2>W_+50||y2<-50||y2>H_+50){s.x=Math.random()*2-1;s.y=Math.random()*2-1;s.z=1;continue}
+const a=Math.min(1,(1-s.z)*1.6);cx.strokeStyle=`hsla(${s.h},95%,${70+a*20}%,${a})`;cx.lineWidth=.6+(1-s.z)*2.2;cx.beginPath();cx.moveTo(x1,y1);cx.lineTo(x2+.01,y2);cx.stroke()}
+requestAnimationFrame(tick)})();
+let done=false;const wait=ms=>new Promise(r=>setTimeout(r,ms));
+async function endIntro(){if(done)return;done=true;const i=$("#intro");tg=14;i.classList.add("go");await wait(RM?0:550);i.classList.add("out");document.body.classList.remove("pre");tg=.35;await wait(800);i.remove()}
+setTimeout(endIntro,RM?300:2300);$("#intro").onclick=endIntro;
+/* landing content */
+const F=[["⚡","XP & Levels","Earn XP from messages, reactions and voice chat. Weekends are 2x, and staff can start x2 to x10 XP events."],["⚔️","Clan Wars","Create wars, record every game and keep a full war history."],["🔎","Team Finder","LFG posts with sign-up buttons and R1 to R6 rank requirements."],["🎫","Tickets","Custom panels and buttons, claiming, adding users and saved transcripts."],["🛡️","Moderation","Warn, timeout, kick, ban, purge, lock, slowmode and more."],["🤖","AutoMod","Spam, duplicate messages, mention spam, caps, banned words and link filters."],["🚨","Anti-Raid","Join-rate lockdown and a new-account filter."],["🛑","Anti-Nuke","Watches the audit log and stops mass deletes and bans."],["💤","AFK","AFK status with auto-replies and welcome-back messages."]];
+const mqt=F.map(f=>f[1].toUpperCase()).join("  ✦  ")+"  ✦  ";$("#mq").append(el("span",{},mqt),el("span",{},mqt));
+$("#feats").append(...F.map(f=>el("div",{class:"card tilt rv"},el("span",{class:"ico"},f[0]),el("h3",{},f[1]),el("p",{},f[2]))));
+$("#stats").append(...[[6,"","AutoMod filters"],[3,"","Protection layers"],[10,"x","Biggest XP event"],[6,"","Rank tiers"]].map(s=>el("div",{class:"card stat rv","data-count":s[0],"data-suf":s[1]},el("b",{},"0"),el("span",{style:"color:var(--mute)"},s[2]))));
+const W=["XP & levels","Clan wars","Smart moderation","Raid protection","Team finder"];let wi=0;
+setInterval(()=>{const d=$("#words");d.style.opacity=0;setTimeout(()=>{wi=(wi+1)%W.length;d.textContent=W[wi];d.style.opacity=1},400)},2400);
+function countUp(n){const b=n.querySelector("b"),end=+n.dataset.count,t0=performance.now();(function f(t){const k=Math.min(1,(t-t0)/1400);b.textContent=Math.round(end*(1-Math.pow(1-k,3)))+(n.dataset.suf||"");if(k<1)requestAnimationFrame(f)})(t0)}
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");if(e.target.dataset.count)countUp(e.target);io.unobserve(e.target)}}),{threshold:.15});
+$$(".rv").forEach((n,i)=>{n.style.setProperty("--d",(i%6)*.05+"s");io.observe(n)});
+document.addEventListener("pointermove",e=>{const c=e.target.closest&&e.target.closest(".tilt");if(!c)return;const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;c.style.setProperty("--mx",x*100+"%");c.style.setProperty("--my",y*100+"%");c.style.setProperty("--rx",(.5-y)*8+"deg");c.style.setProperty("--ry",(x-.5)*8+"deg")});
+document.addEventListener("pointerout",e=>{const c=e.target.closest&&e.target.closest(".tilt");if(c){c.style.setProperty("--rx","0deg");c.style.setProperty("--ry","0deg")}});
+addEventListener("scroll",()=>{const h=document.documentElement;$("#bar").style.width=scrollY/Math.max(1,h.scrollHeight-innerHeight)*100+"%";const hi=$(".hero-in");if(hi){hi.style.transform=`translateY(${scrollY*.18}px)`;hi.style.opacity=Math.max(0,1-scrollY/700)}},{passive:true});
+/* auth + navigation */
+const show=m=>{$("#spot").style.opacity=m==="app"?0:1;$("#site").classList.toggle("hidden",m==="app");$("#app").classList.toggle("hidden",m!=="app");$("#fx").style.opacity=m==="app"?.5:1;scrollTo(0,0)};
+const labels=()=>["#ob","#ob2"].forEach(s=>$(s).textContent=user?"Open dashboard":"Owner login");
+const openApp=()=>{show("app");render(cur)};
+$("#ob").onclick=$("#ob2").onclick=()=>user?openApp():$("#lm").classList.remove("hidden");
+$("#lx").onclick=()=>$("#lm").classList.add("hidden");
+async function enter(s,go){if(!s){user=null;labels();return}
+ const{data,error}=await sb.from("dashboard_users").select("role").eq("user_id",s.user.id).maybeSingle();
+ if(error||!data){await sb.auth.signOut();user=null;labels();$("#le").textContent="This account is not authorised for the 4EV dashboard.";return}
+ user=s.user;labels();if(go){$("#lm").classList.add("hidden");openApp()}}
+$("#lf").onsubmit=async e=>{e.preventDefault();$("#le").textContent="";const{data,error}=await sb.auth.signInWithPassword({email:$("#em").value.trim(),password:$("#pw").value});if(error)return $("#le").textContent="Wrong email or password.";enter(data.session,true)};
+const NAV=[["overview","📊","Overview"],["messages","💬","Server Messages"],["settings","⚙️","Settings"],["commands","⌨️","Commands"],["logs","📜","Logs"],["moderation","🛡️","Moderation"],["clan","⚔️","Clan"]];
+const nav=$("#nav");nav.append(el("div",{class:"bn"},"4EV"));
+NAV.forEach(n=>{const b=el("button",{class:"nb"+(n[0]==="overview"?" on":""),"data-v":n[0]},el("span",{},n[1]),el("span",{class:"lbl"},n[2]));b.onclick=()=>{$$(".nb").forEach(x=>x.classList.toggle("on",x===b));cur=n[0];render(cur)};nav.append(b)});
+nav.append(el("div",{class:"sp"}));const lo=el("button",{class:"nb"},el("span",{},"🚪"),el("span",{class:"lbl"},"Sign out"));
+lo.onclick=async()=>{await sb.auth.signOut();user=null;$("#pw").value="";labels();cleanup();show("site")};nav.append(lo);
+function cleanup(){if(rt){sb.removeChannel(rt);rt=null}clearInterval(poll)}
+async function render(v){cleanup();const m=$("#view");m.replaceChildren(el("p",{class:"lead2"},"Loading..."));
+ try{m.replaceChildren(...await({overview:vOverview,messages:vMessages,settings:vSettings,commands:vCommands,logs:vLogs,moderation:vMod,clan:vClan}[v])());$$("#view [data-count]").forEach(countUp)}
+ catch(e){m.replaceChildren(el("p",{class:"err"},"Could not load this page: "+e.message))}}
+async function status(){const{data}=await sb.from("bot_status").select("*").eq("id",1).maybeSingle(),f=t=>t&&Date.now()-new Date(t)<150000,on=!!(data&&f(data.last_heartbeat));return{d:data,on,sync:on&&data.msg_sync_ok===true&&f(data.msg_last_synced)}}
+/* pages */
+async function vOverview(){const S=await status(),d=S.d||{},stat=(t,v,suf)=>el("div",typeof v==="number"?{class:"card","data-count":v,"data-suf":suf||""}:{class:"card"},el("h3",{class:"s"},t),el("b",{class:"big"},v==null?"-":String(v)));
+ return[...head("Overview","Live status reported by the bot."),el("div",{class:"grid"},el("div",{class:"card"},el("h3",{class:"s"},"Bot status"),el("div",{class:"pill"},el("span",{class:"dot"+(S.on?" on":"")}),S.on?"Online":"Offline")),stat("Servers",d.guild_count),stat("Members",d.member_count),stat("Latency",d.latency_ms,"ms"),el("div",{class:"card"},el("h3",{class:"s"},"Message sync"),el("div",{class:"pill"},el("span",{class:"dot"+(S.sync?" on":"")}),S.sync?"Working":"Not syncing"))),
+ el("div",{class:"note"},d.last_heartbeat?"Last heartbeat: "+new Date(d.last_heartbeat).toLocaleString()+". Shows offline after 2.5 minutes without one.":"The bot has not reported yet.")]}
+async function vMessages(){const st={q:"",ch:"",au:"",del:false,rows:[],more:false};let S=null,ok=false;
+ const lt=el("span",{},"Checking..."),dot=el("span",{class:"dot"}),live=el("span",{class:"pill"},dot,lt),q=el("input",{type:"search",placeholder:"Search text or username"}),ch=el("select",{},el("option",{value:""},"All channels")),au=el("select",{},el("option",{value:""},"All members")),dl=el("select",{},el("option",{value:"0"},"Hide deleted"),el("option",{value:"1"},"Show deleted")),list=el("div",{class:"card"}),more=el("button",{class:"btn ghost",type:"button"},"Load older messages"),rf=el("button",{class:"btn sm",type:"button"},"Refresh"),note=el("div",{class:"note hidden"});
+ const paint=()=>{const t=!S?"Checking...":!S.on?"Bot offline":!S.sync?"Sync problem":!ok?"Reconnecting...":"Live";lt.textContent=t;dot.className="dot"+(t==="Live"?" on":"")},
+ chk=async()=>{S=await status();paint()},
+ build=()=>{let r=sb.from("messages").select("*").order("created_at",{ascending:false}).limit(50);if(st.ch)r=r.eq("channel_id",st.ch);if(st.au)r=r.eq("author_id",st.au);if(!st.del)r=r.is("deleted_at",null);const s=st.q.replace(/[,()*%\\]/g," ").trim();if(s)r=r.or(`content.ilike.%${s}%,username.ilike.%${s}%,display_name.ilike.%${s}%`);return r},
+ row=m=>el("div",{class:"msg"+(m.deleted_at?" del":"")+(m._n?" nw":"")},el("img",{src:m.avatar_url||"data:,",alt:"",loading:"lazy",referrerpolicy:"no-referrer"}),el("div",{},el("div",{class:"meta"},el("b",{},m.display_name||m.username)," @"+m.username+" · #"+m.channel_name+" · "+new Date(m.created_at).toLocaleString(),m.edited_at?el("span",{class:"tg"},"edited"):"",m.deleted_at?el("span",{class:"tg"},"deleted"):""),el("p",{},m.content||(m.has_attachments?"[attachment]":"")))),
+ draw=()=>{list.replaceChildren(...(st.rows.length?st.rows.map(row):[el("p",{class:"lead2"},"No messages found. New messages from your server appear here live.")]));st.rows.forEach(m=>delete m._n);more.classList.toggle("hidden",!st.more)},
+ load=async app=>{let r=build();if(app&&st.rows.length)r=r.lt("created_at",st.rows[st.rows.length-1].created_at);const{data,error}=await r;if(error){note.textContent="Could not load messages: "+error.message;note.classList.remove("hidden");return}note.classList.add("hidden");st.rows=app?st.rows.concat(data):data;st.more=data.length===50;draw()},
+ match=m=>(!st.ch||m.channel_id===st.ch)&&(!st.au||m.author_id===st.au)&&(st.del||!m.deleted_at)&&(!st.q||[m.content,m.username,m.display_name].join(" ").toLowerCase().includes(st.q.toLowerCase()));
+ let tm;q.oninput=()=>{clearTimeout(tm);tm=setTimeout(()=>{st.q=q.value;load()},350)};ch.onchange=()=>{st.ch=ch.value;load()};au.onchange=()=>{st.au=au.value;load()};dl.onchange=()=>{st.del=dl.value==="1";load()};more.onclick=()=>load(true);rf.onclick=()=>{load();chk()};
+ rt=sb.channel("msgs").on("postgres_changes",{event:"*",schema:"public",table:"messages"},p=>{const m=p.new;if(!m||!m.id)return;const i=st.rows.findIndex(x=>x.id===m.id);if(i>=0){if(match(m))st.rows[i]=m;else st.rows.splice(i,1)}else if(p.eventType==="INSERT"&&match(m)){m._n=1;st.rows.unshift(m)}draw()}).subscribe(s=>{ok=s==="SUBSCRIBED";paint()});
+ poll=setInterval(chk,20000);chk();load();
+ sb.from("messages").select("channel_id,channel_name,author_id,display_name,username").order("created_at",{ascending:false}).limit(1000).then(({data})=>{const c=new Map,a=new Map;(data||[]).forEach(m=>{c.set(m.channel_id,m.channel_name);a.set(m.author_id,m.display_name||m.username)});c.forEach((n,id)=>ch.append(el("option",{value:id},"#"+n)));a.forEach((n,id)=>au.append(el("option",{value:id},n)))});
+ return[...head("Server Messages","Messages from your server, saved by the bot. Ticket channels and DMs are never collected."),el("div",{style:"display:flex;gap:10px;align-items:center;flex-wrap:wrap"},live,rf),el("div",{class:"bar"},q,ch,au,dl),note,list,el("div",{style:"margin-top:14px;text-align:center"},more)]}
+async function save(key,value,msg){const{error}=await sb.from("bot_settings").upsert({key,value,updated_by:user.id,updated_at:new Date().toISOString()});msg.className=error?"err":"ok";msg.textContent=error?"Save failed: "+error.message:"Saved. The bot applies it within about a minute."}
+const XP=[["message_xp_min","Message XP minimum",8],["message_xp_max","Message XP maximum",15],["reaction_xp_min","Reaction XP minimum",3],["reaction_xp_max","Reaction XP maximum",8],["vc_xp_normal","Voice XP per minute (members)",50],["vc_xp_staff","Voice XP per minute (staff)",100]];
+async function vSettings(){const g=async k=>{const{data,error}=await sb.from("bot_settings").select("value").eq("key",k).maybeSingle();if(error)throw error;return(data&&data.value)||{}},x=await g("xp"),m=await g("messages");
+ const num=(id,l,v,mx)=>[el("label",{for:id},l),el("input",{type:"number",min:"0",max:mx,id,value:v})],sel=(id,l,o,v)=>{const s=el("select",{id},...o.map(a=>el("option",{value:a[0]},a[1])));s.value=v;return[el("label",{for:id},l),s]};
+ const f1=el("form",{class:"card"},el("h3",{},"XP values"),el("div",{class:"form"})),g1=f1.lastChild,ms=el("div",{role:"status"});
+ XP.forEach(a=>g1.append(el("div",{},...num("x_"+a[0],a[1],x[a[0]]??a[2],"100000"))));
+ g1.append(el("div",{},...sel("x_ev","XP event multiplier",Array.from({length:10},(_,i)=>[i+1,i?i+1+"x XP event":"Off (1x)"]),x.xp_event??1)));
+ f1.append(el("button",{class:"btn",type:"submit",style:"margin-top:18px"},"Save XP settings"),ms);
+ f1.onsubmit=e=>{e.preventDefault();const v={xp_event:+$("#x_ev").value};XP.forEach(a=>v[a[0]]=Math.max(0,parseInt($("#x_"+a[0]).value,10)||0));if(v.message_xp_min>v.message_xp_max||v.reaction_xp_min>v.reaction_xp_max){ms.className="err";ms.textContent="Minimum can't be higher than maximum.";return}save("xp",v,ms)};
+ const f2=el("form",{class:"card",style:"margin-top:16px"},el("h3",{},"Server message collection"),el("div",{class:"form"})),g2=f2.lastChild,m2=el("div",{role:"status"});
+ g2.append(el("div",{},...sel("m_en","Save server messages",[["1","On"],["0","Off"]],m.enabled===false?"0":"1")),el("div",{},...sel("m_bt","Include bot messages",[["0","No"],["1","Yes"]],m.collect_bots?"1":"0")),el("div",{},...num("m_rd","Keep messages for (days, 0 = forever)",m.retention_days??30,"365")));
+ f2.append(el("button",{class:"btn",type:"submit",style:"margin-top:18px"},"Save message settings"),m2);
+ f2.onsubmit=e=>{e.preventDefault();save("messages",{enabled:$("#m_en").value==="1",collect_bots:$("#m_bt").value==="1",retention_days:Math.min(365,Math.max(0,parseInt($("#m_rd").value,10)||0))},m2)};
+ return[...head("Bot settings","Changes are saved to Supabase and applied by the bot."),f1,f2,el("div",{class:"note"},"AutoMod, Anti-Raid and Anti-Nuke settings can be added here once the bot is set up to read them.")]}
+const CMDS=[["Moderation (staff)","/mod warn, warnings, clearwarnings, timeout, untimeout, kick, ban, unban, purge, lock, unlock, slowmode, nuke, unlockall, logchannel"],["Protection (staff)","/automod dashboard, /antiraid dashboard, /antinuke dashboard"],["XP","/xp view, leaderboard, status. Staff: set, channel, stop, x2 to x10"],["Clan wars (staff)","/war create, result, history"],["Finding players","/lfg post, /lfg clanwar (owner), /lfg setrole (staff), /rank"],["Tickets","/tickets dashboard (staff), /tickets close"],["AFK","/afk, /afksettings (staff)"],["Other","/help"]];
+async function vCommands(){return[...head("Commands","Every slash command found in bot.py."),el("div",{class:"cmds"},CMDS.map(c=>el("div",{class:"card"},el("h3",{},c[0]),el("p",{},c[1])))),el("div",{class:"note"},"Read-only. Commands are defined in the bot's code.")]}
+async function vLogs(){const{data,error}=await sb.from("bot_logs").select("*").order("created_at",{ascending:false}).limit(100);if(error)throw error;const b=el("button",{class:"btn ghost",type:"button"},"Refresh");b.onclick=()=>render("logs");const o=[...head("Logs","Activity and errors the bot has sent. Newest first."),b];
+ if(!data.length){o.push(el("div",{class:"note"},"No logs yet."));return o}o.push(el("div",{class:"card sc",style:"margin-top:14px"},el("table",{},el("tr",{},el("th",{},"Time"),el("th",{},"Level"),el("th",{},"Message")),data.map(r=>el("tr",{},el("td",{},new Date(r.created_at).toLocaleString()),el("td",{class:"lvl-"+r.level},r.level),el("td",{},r.message))))));return o}
+async function vMod(){return[...head("Moderation","Controls for supported moderation functions."),el("div",{class:"note"},"Not connected yet. Banning, kicking and timeouts from this site need a secure command queue between the dashboard and the bot. Until then, use the /mod commands in Discord.")]}
+async function vClan(){return[...head("Clan management","Space for future 4EV features."),el("div",{class:"note"},"Not connected yet. War history and the XP leaderboard live in the bot's data file, so the bot needs to sync them to Supabase first.")]}
+/* playground */
+const D={on:{spam:1,dup:1,men:1,caps:1,link:0,word:0},t:[],last:null,out:0,n:0};
+const RU={spam:["Message spam","timeout"],dup:["Repeated message","warn"],men:["Mention spam","timeout"],caps:["Excessive caps","warn"],link:["Link posted","delete"],word:["Banned word","delete"]},FN={spam:"Spam",dup:"Duplicates",men:"Mentions",caps:"Caps",link:"Links",word:"Banned words"};
+const chat=$("#chat"),ci=$("#ci");
+function say(c,n,t){const m=el("div",{class:"cm "+c},el("div",{class:"av"},c==="bot"?"🛡️":"🙂"),el("div",{},el("div",{style:"font-size:12px;color:var(--mute)"},n),el("div",{class:"tx"},t)));chat.append(m);chat.scrollTop=chat.scrollHeight;return m}
+function check(x){const now=Date.now();if(D.on.men&&(x.match(/@\w+/g)||[]).length>=5)return"men";
+D.t=D.t.filter(v=>now-v<5000);D.t.push(now);if(D.on.spam&&D.t.length>=5){D.t=[];return"spam"}
+if(D.on.dup){if(D.last&&D.last[0]===x&&now-D.last[2]<=20000){if(++D.last[1]>=3){D.last=[x,0,now];return"dup"}}else D.last=[x,1,now]}
+const L=x.replace(/[^a-z]/gi,"");if(D.on.caps&&x.length>=10&&L&&L.replace(/[^A-Z]/g,"").length/L.length>=.7)return"caps";
+if(D.on.word&&/scam|free ?nitro/i.test(x))return"word";if(D.on.link&&/https?:\/\//i.test(x))return"link";return null}
+function send(x){x=(x||"").trim().slice(0,200);if(!x||D.out)return;const r=check(x),m=say("","You",x);if(!r)return;const a=RU[r][1];if(a==="timeout"){D.out=1;ci.disabled=true}
+setTimeout(()=>{m.classList.add("bad");D.n++;$("#dstat").textContent="Blocked: "+D.n;const act=a==="timeout"?"timeout (5 min in the real bot, 8s here)":a==="warn"?"warning issued":"message deleted";
+setTimeout(()=>say("bot","4EV AutoMod","Removed: "+RU[r][0]+". Action: "+act+"."),150);$("#dlog").prepend(el("div",{class:"le"},new Date().toLocaleTimeString()+" · "+RU[r][0]+" → "+a));
+if(a==="timeout"){let s=8;const iv=setInterval(()=>{ci.placeholder="Timed out... "+s+"s";if(s--<=0){clearInterval(iv);D.out=0;ci.disabled=false;ci.placeholder="Type a message and press Enter"}},1000)}},300)}
+const paint=()=>$$("#flt .chip").forEach(c=>c.classList.toggle("on",!!D.on[c.dataset.k]));
+Object.keys(FN).forEach(k=>{const c=el("button",{class:"chip","data-k":k,type:"button"},FN[k]);c.onclick=()=>{D.on[k]=D.on[k]?0:1;paint()};$("#flt").append(c)});paint();
+[["Spam x6","spam",()=>[1,2,3,4,5,6].forEach(i=>setTimeout(()=>send("hey "+i),i*110))],["Repeat x3","dup",()=>[0,1,2].forEach(i=>setTimeout(()=>send("buy my stuff"),i*150))],["ALL CAPS","caps",()=>send("STOP TALKING AND LISTEN TO ME NOW")],["Mention 5","men",()=>send("@a @b @c @d @e hello")],["Post a link","link",()=>send("check https://example.com")],["Free nitro","word",()=>send("get free nitro here")]].forEach(q=>{const b=el("button",{class:"chip",type:"button"},q[0]);b.onclick=()=>{if(!D.on[q[1]]){D.on[q[1]]=1;paint()}q[2]()};$("#quick").append(b)});
+ci.onkeydown=e=>{if(e.key==="Enter"){send(ci.value);ci.value=""}};$("#cs").onclick=()=>{send(ci.value);ci.value="";ci.focus()};
+say("bot","4EV AutoMod","Welcome! Type anything, or tap the buttons to try and spam me.");
+const TT=[[100,"4EV IMMORTAL"],[75,"LEGEND"],[50,"CHAMPION"],[40,"COMMANDER"],[30,"VETERAN"],[25,"ELITE MEMBER"],[20,"SKILLED"],[15,"RISING FORCE"],[10,"WARRIOR"],[5,"RECRUIT"],[0,"ROOKIE"]];
+function lab(){const n=+$("#lv").value,tot=100*(n-1)+75*(n-1)*(n-2);$("#lt").textContent=TT.find(x=>n>=x[0])[1];
+$("#ln").textContent="Level "+n+" · "+Math.max(100,100+(n-1)*150).toLocaleString()+" XP to the next level · "+tot.toLocaleString()+" XP total · about "+Math.round(tot/11.5).toLocaleString()+" messages at the default 8 to 15 XP";$("#lb").style.width=n+"%"}
+$("#lv").oninput=lab;lab();
+addEventListener("pointermove",e=>{$("#spot").style.transform=`translate(${e.clientX}px,${e.clientY}px)`});
+$$(".btn").forEach(b=>{b.addEventListener("pointermove",e=>{const r=b.getBoundingClientRect();b.style.setProperty("--tx",(e.clientX-r.left-r.width/2)*.18+"px");b.style.setProperty("--ty",(e.clientY-r.top-r.height/2)*.28+"px")});b.addEventListener("pointerleave",()=>{b.style.setProperty("--tx","0px");b.style.setProperty("--ty","0px")})});
+sb.auth.getSession().then(({data})=>enter(data.session,false));
+</script></body></html>
