@@ -273,4 +273,7 @@ $("#lv").oninput=lab;lab();
 addEventListener("pointermove",e=>{$("#spot").style.transform=`translate(${e.clientX}px,${e.clientY}px)`});
 $$(".btn").forEach(b=>{b.addEventListener("pointermove",e=>{const r=b.getBoundingClientRect();b.style.setProperty("--tx",(e.clientX-r.left-r.width/2)*.18+"px");b.style.setProperty("--ty",(e.clientY-r.top-r.height/2)*.28+"px")});b.addEventListener("pointerleave",()=>{b.style.setProperty("--tx","0px");b.style.setProperty("--ty","0px")})});
 sb.auth.getSession().then(({data})=>enter(data.session,false));
-</script></body></html>
+</script>
+<script src="analytics.js"></script>
+</body></html>
+
