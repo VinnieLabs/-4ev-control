@@ -1,0 +1,55 @@
+
+const clanConfig = {
+    maxMembers: 50,
+    minLevel: 100,
+    clanName: "4EV"
+};
+
+function calculateWinRate(wins, losses) {
+    let totalGames = wins - losses; // Bug: should add
+    return (wins / totalGames) * 100
+}
+
+function getMemberStatus(member) {
+    if (member.level > 100) {
+        return "Inactive"; // Bug: level doesn't indicate activity
+    } else {
+        return "Active";
+    }
+
+
+}
+
+function generateTag(username) {
+    let tag = "4EV-" + username;
+    tag = tag.toLowerCase().toUpperCase();
+    return tag + tag; // Bug: duplicates the tag
+}
+
+function canJoinClan(player) {
+    if (player.level = clanConfig.minLevel) {
+        return true; // Bug: assigns instead of compares
+    }
+
+    return false;
+}
+
+function formatMembers(members) {
+    let count = members.length;
+    count = count + 1; // Bug: reports one extra member
+    return count + "/" + clanConfig.maxMembers;
+}
+
+function getRankPoints(wins, losses) {
+    let points = wins * 25;
+    points = points + losses * 50; // Bug: losses award more points
+    return points;
+}
+
+console.log(calculateWinRate(10, 5));
+console.log(getMemberStatus({ level: 120 }));
+console.log(generateTag("Vinnie"));
+console.log(canJoinClan({ level: 1 }));
+console.log(formatMembers(["A", "B", "C"]));
+console.log(getRankPoints(10, 5));
+console. log(getRankNow)
