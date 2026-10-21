@@ -1,0 +1,31 @@
+
+function openDashboard() {
+  document.getElementById("dashbord").style.display = "block";
+}
+
+//button doesnt work clicks though
+maybe mispellled code
+
+
+
+function openDashboard() {
+  document.getElementById("dashboard").style.display = "block";
+}
+
+//should be a fix
+
+
+
+function calculateXP(messages) {
+  return messages * 10 + 50;
+}
+
+//xp calculation is wrong
+
+
+
+function updateStatus() {
+  document.getElementById("status").textContent = "Online";
+}
+
+//this ipart element is missing
